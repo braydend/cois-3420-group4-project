@@ -1,2 +1,2 @@
-# cois-3420-group4-project
+# Don't commit to master
 Web App Dev Project Repo
