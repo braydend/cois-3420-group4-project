@@ -1,0 +1,24 @@
+.container{
+    justify-content: center;
+    text-align: center;
+}
+
+form{
+    padding-top: 2em;
+}
+
+.form-element{
+    display: flex;
+    justify-content: space-between;
+    padding-left: 20%;
+    padding-right: 20%;
+    padding-top: 0.3em;
+}
+
+.form-element input{
+    width: 50em;
+}
+
+.form-buttons{
+    margin-top: 3em;
+}
