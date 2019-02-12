@@ -22,3 +22,19 @@ form{
 .form-buttons{
     margin-top: 3em;
 }
+
+
+#remember-forgot{
+    padding-top: 2em;
+}
+
+.login-remember{
+    width: 50%;
+    display: inline;
+}
+
+.login-forgot{
+    width: 50%;
+    float: right;
+}
+
