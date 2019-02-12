@@ -23,7 +23,6 @@ form{
     margin-top: 3em;
 }
 
-
 #remember-forgot{
     padding-top: 2em;
 }
@@ -38,3 +37,24 @@ form{
     float: right;
 }
 
+.movie-grid{
+    display: flex;
+    flex-wrap: wrap;
+    padding-left: 20%;
+    padding-right: 20%;
+}
+
+.movie{
+    padding: 1em;
+}
+
+.movie img{
+    width: 126px;
+    height: 200px;
+}
+
+.movie-btns{
+    padding-top: 5px;
+    display: flex;
+    justify-content: space-evenly;
+}
