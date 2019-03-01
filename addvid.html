@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Add Movie</title>
+    <link rel="stylesheet" href="css/basestyle.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  </head>
+  <body>
+    <div class="container">
+      <h1>Add Movie</h1>
+      <form>
+        <!-- :D Finished -->
+        <div class="form-element">
+          <label for="title">Title:</label>
+          <input type="text" name="title" id="title" maxlength="100"/>
+        </div>
+        <!-- NOT Finished -->
+        <div class="form-element">
+          <label for="star_rating">Star Rating:</label>
+          <div class="star_rating">
+            <span class="fa fa-star" aria-hidden="true"></span>
+            <span class="fa fa-star" aria-hidden="true"></span>
+            <span class="fa fa-star" aria-hidden="true"></span>
+            <span class="fa fa-star" aria-hidden="true"></span>
+            <span class="fa fa-star" aria-hidden="true"></span>
+          </div>
+        </div>
+        <!-- :D Finished -->
+        <div class="form-element">
+          <label for="genre">Genre:</label>
+          <!-- input type="text" name="genre" id="genre" /-->
+          <div class="genre">
+            <div class="criteria-element">
+              <label for="action">Action</label>
+              <input type="checkbox" name="action">
+            </div>
+            <div class="criteria-element">
+              <label for="adventure">Adventure</label>
+              <input type="checkbox" name="adventure">
+            </div>
+            <div class="criteria-element">
+              <label for="comedy">Comedy</label>
+              <input type="checkbox" name="comedy">
+            </div>
+            <div class="criteria-element">
+              <label for="crime">Crime</label>
+              <input type="checkbox" name="crime">
+            </div>
+            <div class="criteria-element">
+              <label for="drama">Drama</label>
+              <input type="checkbox" name="drama">
+            </div>
+            <div class="criteria-element">
+              <label for="epic">Epic/Historical</label>
+              <input type="checkbox" name="epic">
+            </div>
+            <div class="criteria-element">
+              <label for="horror">Horror</label>
+              <input type="checkbox" name="horror">
+            </div>
+            <div class="criteria-element">
+              <label for="musical">Musical</label>
+              <input type="checkbox" name="musical">
+            </div>
+            <div class="criteria-element">
+              <label for="sci_fi">Science Fiction</label>
+              <input type="checkbox" name="sci_fi">
+            </div>
+            <div class="criteria-element">
+              <label for="war">War</label>
+              <input type="checkbox" name="war">
+            </div>
+            <div class="criteria-element">
+              <label for="western">Western</label>
+              <input type="checkbox" name="western">
+            </div>
+          </div>
+        </div>
+        <!-- :D Finished -->
+        <div class="form-element">
+          <label for="MPAA_rating">MPAA Rating:</label>
+          <div class="MPAA_rating">
+            <div class="criteria-element">
+              <label for="general_audience"><img src="./images/G.png" alt="General Audiences" height=20px></label>
+              <input type="radio" name="MPAA" id="general_audience" />
+            </div>
+            <div class="criteria-element">
+              <label for="parental_guidance"><img src="./images/PG.png" alt="Parental Guidance" height=20px></label>
+              <input type="radio" name="MPAA" id="parental_guidance" />
+            </div>
+            <div class="criteria-element">
+              <label for="pg_13"><img src="./images/PG-13.png" alt="PG 13" height=20px></label>
+              <input type="radio" name="MPAA" id="pg_13" />
+            </div>
+            <div class="criteria-element">
+              <label for="restricted"><img src="./images/R.png" alt="Restricted" height=20px></label>
+              <input type="radio" name="MPAA" id="restricted" />
+            </div>
+            <div class="criteria-element">
+              <label for="nc_17"><img src="./images/NC-17.png" alt="No children under 17" height=20px></label>
+              <input type="radio" name="MPAA" id="nc_17" />
+            </div>
+          </div>
+        </div>
+        <!-- NOT Finished -->
+        <div class="form-element">
+          <label for="year">Year:</label>
+          <input type="number" min="1900" max="2099" step="1" value="2016" />
+        </div>
+        <!-- :D Finished -->
+        <div class="form-element">
+          <label for="run_time">Running Time:</label>
+          <input type="time" min='00:01' max= '11:59' id="run_time">
+        </div>
+        <!-- :D Finished -->
+        <div class="form-element">
+          <label for="theater_release">Theater Release:</label>
+          <div class="theater_release">
+            <div class="criteria-element">
+              <label for="theater_yes">Yes</label>
+              <input type="radio" name="theater" id="theater_yes" value="Yes"/>
+            </div>
+            <div class="criteria-element">
+              <label for="theater_no">No</label>
+              <input type="radio" name="theater" id="theater_no" value="No"/>
+            </div>
+          </div>
+        </div>
+        <!-- NOT Finished -->
+        <div class="form-element">
+          <label for="dvd_release">DVD Release:</label>
+          <div class="dvd_release">
+            <div class="criteria-element">
+              <label for="dvd_yes">Yes</label>
+              <input type="radio" name="dvd" id="dvd_yes" value="Yes"/>
+            </div>
+            <div class="criteria-element">
+              <label for="dvd_no">No</label>
+              <input type="radio" name="dvd" id="dvd_no" value="No"/>
+            </div>
+          </div>
+        </div>
+        <!-- :D Finished -->
+        <div class="form-element">
+          <label for="actors">Actors:</label>
+          <input type="text" name="actors" id="actors" maxlength="100"/>
+        </div>
+        <!-- :D Finished -->
+        <div class="form-element">
+          <label for="studio">Studio:</label>
+          <input type="text" name="studio" id="studio" maxlength="100"/>
+        </div>
+        <!-- :D Finished -->
+        <div class="form-element">
+          <label for="plot">Plot Summary:</label>
+          <textarea name="plot" rows="8" cols="80"></textarea>
+        </div>
+        <!-- :D Finished -->
+        <div class="form-element">
+          <label for="vid_type">Video Format:</label>
+          <div class="vid_type">
+            <div class="criteria-element">
+              <label for="dvd">DVD</label>
+              <input type="checkbox" name="dvd">
+            </div>
+            <div class="criteria-element">
+              <label for="blu-ray">Blu-Ray</label>
+              <input type="checkbox" name="blu-ray">
+            </div>
+            <div class="criteria-element">
+              <label for="4k-disk">4k Disk</label>
+              <input type="checkbox" name="4k-disk">
+            </div>
+            <div class="criteria-element">
+              <label for="digital-sd">Digital SD</label>
+              <input type="checkbox" name="digital-sd">
+            </div>
+            <div class="criteria-element">
+              <label for="digital-hd">Digital HD</label>
+              <input type="checkbox" name="digital-hd">
+            </div>
+            <div class="criteria-element">
+              <label for="digital-4k">Digital 4k</label>
+              <input type="checkbox" name="digital-4k">
+            </div>
+          </div>
+        </div>
+        <!-- :D Finished -->
+        <div class="form-buttons">
+          <label for="upload_cover">Upload Cover Image:</label>
+          <input type="submit" name="upload_cover" value="Browse ..." />
+        </div>
+        <div class="form-buttons">
+          <input type="submit" name="btn_addMov" value="Add Movie!">
+          <input type="reset" />
+        </div>
+      </form>
+    </div>
+  </body>
+</html>
