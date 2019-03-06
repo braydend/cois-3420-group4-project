@@ -1,3 +1,15 @@
+.fa-star{
+  color: gray;
+}
+
+.fa-star:hover{
+  color: orange;
+}
+
+.fa-star:active{
+  color: yellow;
+}
+
 .container{
     justify-content: center;
     text-align: center;
@@ -21,6 +33,28 @@ form{
 
 .form-buttons{
     margin-top: 3em;
+}
+
+.genre, .MPAA_rating, .star_rating, .theater_release, .dvd_release, .vid_type{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-self: flex-start;
+  width: 42em;
+  margin: 0.5em;
+}
+
+.criteria-element{
+  display: flex;
+  flex-direction: column;
+  align-self: flex-start;
+  padding: 0.2em;
+  margin: 0.2em;
+}
+
+.criteria-element > input {
+  width: inherit;
+  align-self: center;
 }
 
 #remember-forgot{
@@ -57,4 +91,139 @@ form{
     padding-top: 5px;
     display: flex;
     justify-content: space-evenly;
+}
+
+textarea{
+  resize: none;
+}
+
+
+
+/* search styles */
+
+nav
+{
+  height: 100%;
+  position: fixed;
+  height:45em ;
+  font-size: 19pt;
+}
+
+table
+{
+  float: right;
+  height:40em;
+  width: 95%;
+  border: .5em solid black;
+  padding: 2em;
+}
+
+td
+{
+  border:.1em solid black;
+  vertical-align:top;
+  padding: .5em;
+  text-align: top;
+  font-size: 20pt;
+}
+
+ol
+{
+  text-align:top;
+}
+
+
+
+/* page detail styles */
+
+
+h2{
+  font-size: 40pt;
+}
+
+.detailgeneral{
+  display: flex;
+  justify-content: flex-start;
+  padding-left:15em;
+}
+
+.detailgeneral p{
+  font-size: 25pt;
+}
+
+.detailgeneral img{
+  width: 35px;
+  height: 35px;
+}
+
+#rating{
+  padding-left: 10em;
+}
+
+#year{
+  color:#2d2d2d;
+  font-size: 35pt;
+  padding-left: .4em;
+}
+
+#detailsum{
+  display: flex;
+  justify-content: flex-start;
+  padding-left:15em;
+}
+
+#detailsum p{
+  padding-left: 4em;
+}
+
+#detailsum img{
+  width: 315px;
+  height: 500px;
+}
+
+.detaildata{
+  font-size: 14pt;
+  display: flex;
+  justify-content: center;
+}
+
+.detaildata p{
+  padding-left: 1%;
+  padding-right: 1%
+}
+
+
+.detailother ul{
+  padding-left: 38.688em;
+  text-align: left;
+  list-style: none;
+}
+
+
+
+
+
+
+/* tempStyleSheet.css */
+
+body
+{
+  width:100%;
+}
+h1
+{
+  font-size: 32pt;
+  
+}
+.search
+{
+  justify-content: center;
+  text-align: center;
+}
+
+ul li:nth-child(even), ol li:nth-child(even)
+{
+  width:100%;
+  background-color:#566890;
+  
 }
