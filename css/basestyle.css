@@ -101,13 +101,15 @@ textarea{
 
 /* search styles */
 
-nav
-{
-  height: 100%;
-  position: fixed;
-  height:45em ;
-  font-size: 19pt;
-}
+/* This needs to use class selectors to sop it interrupting the page navigation */
+
+/*nav*/
+/*{*/
+  /*height: 100%;*/
+  /*position: fixed;*/
+  /*height:45em ;*/
+  /*font-size: 19pt;*/
+/*}*/
 
 table
 {
@@ -221,9 +223,31 @@ h1
   text-align: center;
 }
 
-ul li:nth-child(even), ol li:nth-child(even)
-{
-  width:100%;
-  background-color:#566890;
-  
+/* This needs to use class selectors to sop it interrupting the page navigation */
+
+/*ul li:nth-child(even), ol li:nth-child(even)*/
+/*{*/
+  /*width:100%;*/
+  /*background-color:#566890;*/
+  /**/
+/*}*/
+
+#page-navigation{
+    width: 100%;
+    vertical-align: center;
+    display: flex;
+    flex-wrap: wrap;
+    margin: 15px 0 15px 0;
+}
+
+#page-navigation ul{
+    display: inline-flex;
+    justify-content: space-around;
+    width: inherit;
+}
+
+#page-navigation ul li{
+    background-color: aqua;
+    list-style-type: none;
+    padding: 1em 3em 1em 3em;
 }
