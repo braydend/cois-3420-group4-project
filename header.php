@@ -13,9 +13,9 @@
             // Menu to be displayed to authed users
             function echoNav(){
                 // Need to decide what to put in nav
-                echo("<li>Nav Item 1</li>");
-                echo("<li>Nav Item 2</li>");
-                echo("<li>Nav Item 3</li>");
+                echo("<li><a href='index.php'>Home</a></li>");
+                echo("<li><a href='search.php'>Search</a></li>");
+                echo("<li><a href='account.php'>Account</a></li>");
                 echo("<li><a href='logout.php'>Logout</a></li>");
             }
 
