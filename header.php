@@ -25,15 +25,15 @@
             }
 
             // To display to the users where they are on the site
-            function echoBreadcrumbs(){
+            function echoBreadcrumbs($title){
                 // Need to add logic to change this dynamically
                 // Maybe use $title?
-                echo("<span>You are here</span>");
+                echo("<span>You are on " . $title . "</span>");
             }
 
             // Logic controlling which menu to display based
             // on whether or not the user is logged in
-            echoBreadcrumbs();
+            echoBreadcrumbs($title);
             echo("<ul>");
             if(isset($_SESSION['userid'])){
                 echoNav();
