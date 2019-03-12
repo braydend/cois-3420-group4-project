@@ -242,6 +242,7 @@ h1
 
 #page-navigation ul{
     display: inline-flex;
+    flex-wrap: wrap;
     justify-content: space-around;
     width: inherit;
 }
@@ -249,5 +250,11 @@ h1
 #page-navigation ul li{
     background-color: aqua;
     list-style-type: none;
+    width: 10em;
     padding: 1em 3em 1em 3em;
+    text-align: center;
+}
+
+#page-navigation a{
+    text-decoration: none;
 }
