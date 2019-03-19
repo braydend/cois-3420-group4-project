@@ -1,3 +1,15 @@
+/* for validation on account creation page. */
+.error{
+  color:red;
+  font-style: italic;
+}
+
+.noerror{
+	display: none;
+}
+
+/* end of validation stuff */
+
 .fa-star{
   color: gray;
 }
@@ -29,6 +41,10 @@ form{
 
 .form-element input{
     width: 50em;
+}
+
+.form-element p {
+  width: 100%;
 }
 
 .form-buttons{
@@ -215,7 +231,7 @@ body
 h1
 {
   font-size: 32pt;
-  
+
 }
 .search
 {
