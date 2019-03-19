@@ -32,11 +32,13 @@
 
     // Enusre that username given does not already exist in the table ...
     $query = "SELECT 1 username FROM user_accounts WHERE username = ?";
-    $stmt = $pdo->prepare($query)->execute([$_POST['username']]);
+    $stmt = $pdo->prepare($query);
+    $stmt->execute([$_POST['username']]);
+    $result = $stmt->fetchAll();
 
     // There already exists an account with given username.
-    if (!$stmt) {
-
+    if (!empty($result)) {
+      echo("This username already exists");
       // Flag as invalid.
       $usernameFree = false;
 
@@ -45,13 +47,12 @@
     // Ensure that email given does not already exist in the table ...
     $query = "SELECT 1 email FROM user_accounts WHERE email = ?";
     $stmt = $pdo->prepare($query);
-    echo $stmt->execute([$_POST['email']])->fetchAll();
-
-    // echo $stmt;
+    $stmt->execute([$_POST['email']]);
+    $result = $stmt->fetchAll();
 
     // There already exists an account with given username.
-    if (!$stmt) {
-
+    if (!empty($result)) {
+      echo("This email already exists");
       // Flag as invalid.
       $emailFree = false;
 
@@ -107,6 +108,10 @@
       $pdo->prepare($query)->execute([$_POST['username'], $_POST['name'], $_POST['email'], $hash]);
 
       //sessionStart('user_id');
+
+      session_start();
+      $_SESSION['user_id'] = $user_id;
+
 
       // http_redirect
       //header("Location: ./index.php");
