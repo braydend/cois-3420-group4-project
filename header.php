@@ -22,7 +22,7 @@
             // Menu to be displayed to unauthed users
             function echoLogInMenu(){
                 echo("<li><a href='login.php'>Login</a></li>");
-                echo("<li><a href='register.php'>Register</a></li>");
+                echo("<li><a href='account.php'>Register</a></li>");
             }
 
             // To display to the users where they are on the site
