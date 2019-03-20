@@ -2,14 +2,9 @@
     $title = "Movie Database";
     include('header.php');
 
-    //Enable when account creation is implemented
-//    if(!isset($_SESSION['userid'])){
-//        header('location: register.php');
-//    }
-
-    // REMOVE THIS ONCE ACCOUNT CREATION IS IMPLEMENTED
-    // For testing the menu functionality
-//    $_SESSION['userid'] = true;
+    if(!isset($_SESSION['userid'])){
+        header('location: register.php');
+    }
 
     // For accessing DB
     include('includes/library.php');
