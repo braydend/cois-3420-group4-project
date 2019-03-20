@@ -4,6 +4,12 @@
 	$title = "Log in";
 	include('includes/library.php');
     include('header.php');
+
+	// Flag variables for validation errors.
+	$usernameValid = true;
+	$passwordValid = true;
+
+	// Get db connection
 	$pdo = dbconnect();
 
 	// stops loading page if too many attempts made
@@ -29,7 +35,7 @@
 		if(empty($result)) {
 
 			$_SESSION['attempts']--;								// Decrement login attempts.
-			echo "<p>username doesn't exist</p>";   // State validation error.
+			$usernameValid = false;									// Flag username as invalid.
 		}
 
 
@@ -39,7 +45,7 @@
 		else if ( !password_verify($_POST['password'], $result[0]['password']) ) {
 
 			$_SESSION['attempts']--;								// Decrement login attemts.
-			echo "<p>invalid password, you have {$_SESSION['attempts']} attempts left.</p>"; // State validation error.
+			$passwordValid = false;									// Flag password as invalid.
 		}
 
 
@@ -89,10 +95,22 @@
         <div class="form-element">
             <label for="username">Username:</label>
             <input type="text" name="username" id="username" />
+
+						<!-- Inline php for error validation message -->
+						<?php if (!$usernameValid) {
+							echo "<span class='error'>username doesn't exist</span>";
+						} ?>
+
         </div>
         <div class="form-element">
             <label for="password">Password:</label>
             <input type="password" name="password" id="password" />
+
+						<!-- Inline php for error validation message -->
+						<?php if (!$passwordValid) {
+							echo "<span class='error'>invalid password, you have {$_SESSION['attempts']} attempts left.</span>";
+						} ?>
+
         </div>
         <div id="remember-forgot">
             <div class="login-remember">
