@@ -3,6 +3,7 @@
         <?PHP echo($title) ?>
     </title>
     <link rel="stylesheet" href="css/basestyle.css" />
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
 </head>
 <body>
@@ -21,8 +22,8 @@
 
             // Menu to be displayed to unauthed users
             function echoLogInMenu(){
-                echo("<li><a href='login.php'>Login</a></li>");
-                echo("<li><a href='account.php'>Register</a></li>");
+                echo("<a href='login.php'><li>Login</li></a>");
+                echo("<a href='account.php'><li>Register</li></a>");
             }
 
             // To display to the users where they are on the site
