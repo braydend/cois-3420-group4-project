@@ -22,7 +22,6 @@
 		$stmt = $pdo->prepare($query);
 		$stmt->execute([$_POST['username']]);
 		$result = $stmt->fetchAll();
-		$user_id = $result[0]['user_id'];
 
 
 
@@ -61,7 +60,7 @@
 			}
 
       // Set the userid to session variable and redirect to index. (login user.)
-			$_SESSION['userid'] = $user_id;
+			$_SESSION['userid'] = $result[0]['user_id'];
 			header("location: ./search.php");
 
 		}
