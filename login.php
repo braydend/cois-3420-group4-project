@@ -1,9 +1,15 @@
 <?php
 
-	// Still needs the password verify thing (my db doesn't have encrypted passwords)
 	$title = "Log in";
+
 	include('includes/library.php');
-    include('header.php');
+  include('header.php');
+
+  // Variable for number of allowed login attempts.
+	$numAttemptsAllowed = 5;
+
+  // lockout flag variable.
+	$lockout = false;
 
 	// Flag variables for validation errors.
 	$usernameValid = true;
@@ -12,71 +18,95 @@
 	// Get db connection
 	$pdo = dbconnect();
 
-	// stops loading page if too many attempts made
-	if(!isset($_SESSION['attempts']))
-	{
-		$_SESSION['username'] = null;
-		$_SESSION['attempts'] = 5;
+	// Variable will only be unset on first load.
+	if(!isset($_SESSION['attemptsRemaining'])) {
+
+		// Flag for first load.
+		$_SESSION['firstLoad'] = true;
+
+		// Init attempts remaining.
+		$_SESSION['attemptsRemaining'] = $numAttemptsAllowed;
+
 	}
 
-	if(isset($_POST['username']))
-	{
 
-		// Get user from table based on their username.
+  // --- username field is set.
+	if (isset($_POST['username'])) {
+
+		// Get user from table based on their username (which is unique).
 		$name = $_POST['username'];
 		$query = "select * from user_accounts where username = ? Limit 1";
 		$stmt = $pdo->prepare($query);
 		$stmt->execute([$_POST['username']]);
 		$result = $stmt->fetchAll();
 
-
-
-		// ---No user with given username exists in table.
-		if(empty($result)) {
-
-			$_SESSION['attempts']--;								// Decrement login attempts.
-			$usernameValid = false;									// Flag username as invalid.
-		}
-
-
-
-		// ---username exists in table but password given by user is incorrect.
-		// Verify password hash.
-		else if ( !password_verify($_POST['password'], $result[0]['password']) ) {
-
-			$_SESSION['attempts']--;								// Decrement login attemts.
-			$passwordValid = false;									// Flag password as invalid.
-		}
-
-
-
-		// ---username exists and password matches username.
-		else
-		{
-			// Welcome back message.
-			echo "<P>Welcome back, {$name}</p>";
-
-			// sets cookie which doesn't do anything
-			if($_POST["remember"]=='1' || $_POST["remember"]=='true') {
-
-				$hour = time() + 3600 * 24 * 30;
-				setcookie('username', $login, $hour);
-				setcookie('password', $password, $hour);
-
-			}
-
-      // Set the userid to session variable and redirect to index. (login user.)
-			$_SESSION['userid'] = $result[0]['user_id'];
-			header("location: ./search.php");
-
-		}
-
 	}
 
-	// Locks form from loading if too many attempts made.
-	if ($_SESSION['attempts'] <= 0)
-	{
+
+  // --- Do not do any validation or otherwise affect any variables on first load.
+	if ($_SESSION['firstLoad']) {
+		$_SESSION['firstLoad'] = false;
+	}
+
+
+	// --- No user with given username exists in table or no username given.
+	else if ( !isset($_POST['username']) || empty($result) ) {
+
+		$_SESSION['attemptsRemaining']--;						// Decrement login attempts.
+		if ($_SESSION['attemptsRemaining'] <= 0) {  // Set to lockout if too many attempts.
+			$lockout = true;
+		}
+		$usernameValid = false;											// Flag username as invalid.
+	}
+
+
+	// --- username exists in table but password given by user is incorrect or no password given.
+	else if ( !isset($_POST['password']) || !password_verify($_POST['password'], $result[0]['password']) ) {
+
+		$_SESSION['attemptsRemaining']--;						// Decrement login attemts.
+		if ($_SESSION['attemptsRemaining'] <= 0) {	// Set to lockout if too many attempts.
+			$lockout = true;
+		}
+		$passwordValid = false;											// Flag password as invalid.
+	}
+
+
+	// --- username was given and exists and password was given and matches username in the table.
+	else {
+
+		// sets cookie which doesn't do anything
+		// ----------------------------------------( wat do? Graham pls )
+		if($_POST["remember"]=='1' || $_POST["remember"]=='true') {
+
+			$hour = time() + 3600 * 24 * 30;
+			setcookie('username', $login, $hour);
+			setcookie('password', $password, $hour);
+
+		}
+
+		// Unset session variables attemptsRemaining and firstLoad on successful login.
+		unset($_SESSION['attemptsRemaining']);
+		unset($_SESSION['firstLoad']);
+
+    // Set the userid to session variable and redirect to index. (login user.)
+		$_SESSION['userid'] = $result[0]['user_id'];
+		header("location: ./index.php");
+		die();
+	}
+
+
+	// When lockout flag is set.
+	if ($lockout) {
+
+		// Prompt the user that they are locked out (only thing on page).
 		echo "<p>Too many login attempts. Please wait a moment before trying again.</p>";
+
+    //////////////////////////// [ Temp. Put in some kind of timer later. ] ///////////////////////////////////
+		unset($_SESSION['firstLoad']);/////////////////////////////////////////////////////////////////////////////
+		unset($_SESSION['attemptsRemaining']); ////////////////////////////////////////////////////////////////////
+		///////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    // Prevent the rest of the page from loading.
 		exit();
 	}
 
@@ -108,7 +138,7 @@
 
 						<!-- Inline php for error validation message -->
 						<?php if (!$passwordValid) {
-							echo "<span class='error'>invalid password, you have {$_SESSION['attempts']} attempts left.</span>";
+							echo "<span class='error'>invalid password</span>";
 						} ?>
 
         </div>
@@ -127,5 +157,11 @@
         </div>
     </form>
 </div>
+
+<!-- Print out number of login attempts remaining (if there are any) if not the first attempt. -->
+<?php if ( $_SESSION['attemptsRemaining'] < $numAttemptsAllowed && $_SESSION['attemptsRemaining'] > 0 ) {
+  echo "<span>You have {$_SESSION['attemptsRemaining']} login attempts remaining.</span>";
+} ?>
+
 </body>
 </html>
