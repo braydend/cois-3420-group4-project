@@ -7,7 +7,9 @@
     // For accessing DB
     include('includes/library.php');
     $pdo = & dbconnect();
-    $movies = $pdo->query("select * from movies")->fetchAll();
+    $stmt = $pdo->prepare("SELECT * FROM movies WHERE userid = ?");
+    $stmt->execute([$_SESSION['userid']]);
+    $movies = $stmt->fetchAll();
 ?>
 <div class="container">
     <h1>Movies</h1>
