@@ -20,7 +20,14 @@
                     echo("</div>");
                     echo("<div class='movie-btns'>");
                         echo("<a href='" . $movie['id'] . "/editvid.php'><i class='fas fa-pencil-alt'></i></a>");
-                        echo("<a href='" . $movie['id'] . "/deletevid.php'><i class='fas fa-trash-alt'></i></a>");
+                        echo("
+                            <form method='GET' action='deletevid.php'>
+                                <input type='text' name='movieid' value=" . $movie['id'] . " hidden />
+                                <button>
+                                    <i class='fas fa-trash-alt'></i>
+                                </button>
+                            </form>
+                            ");
                         echo("<a href='" . $movie['id'] . "/displaydetails.php'><i class='fas fa-info-circle'></i></a>");
                     echo("</div>");
                 echo("</div>");
