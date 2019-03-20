@@ -7,7 +7,7 @@
 	// sends back to home if not logged in, 
 	if (isset($_SESSION['userid']))
 	{
-		echo "what would you like to update";
+		echo "<h3>Check the boxes for the fields you wish to update</h3>";
 	}
 	else
 	{
@@ -22,24 +22,24 @@
 		{
 			if($check == 'username')
 			{
-				$sql = "update user_accounts set username = value '{$_POST['username']}' where user_id = '{$_SESSION['userid']}'";
-				$pdo->query($sql);
+				$sql = "UPDATE user_accounts SET username = ? WHERE user_id = ?";
+				$pdo->prepare($sql)->execute([$_POST['username'], $_SESSION['userid']]);
 
-				header('location:login.php');
+				header('location:index.php');
 			}	
 			else if($check == 'name')
 			{
-				$sql = "update user_user_accounts set name = value '{$_POST['name']}' where user_id = '{$_SESSION['userid']}'";
-				$pdo->query($sql);
+				$sql = "UPDATE user_accounts SET name = ? WHERE user_id = ?";
+				$pdo->prepare($sql)->execute([$_POST['name'], $_SESSION['userid']]);
 				
 				header('location:index.php');
 			}
 			else if($check == 'email')
 			{
-				$sql = "update user_accounts set email = '{$_POST['email']}' where user_id = '{$_SESSION['userid']}'";
-				$pdo->query($sql);
+				$sql = "UPDATE user_accounts SET email = ? WHERE user_id = ?";
+                $pdo->prepare($sql)->execute([$_POST['email'], $_SESSION['userid']]);
 
-				header('location:login.php');
+                header('location:index.php');
 			}
 			else if($check =='password')
 			{	
@@ -87,7 +87,7 @@
             </div>
 			
 			<div class="form-buttons">
-                <input type="submit" value="Create Account!" />
+                <input type="submit" value="Update Account!" />
                 <input type="reset" />
             </div>
         </form>
