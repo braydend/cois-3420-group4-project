@@ -1,10 +1,17 @@
 <?php
+
+  // If already logged in, redirect immediately back to index.
+  if ( isset( $_SESSION['userid'] ) ) {
+    header("Location: ./index.php");
+    die();
+  }
+
   // --- Database Object ---
   require_once("includes/library.php"); // Include library file
   $pdo = & dbconnect();                 // Construct database object
 
 
-  // --- Create user_accounts table if it does not already exist.
+  // --- Create user_accounts table if it does not already exist (if first account on site)
 
   $pdo -> query("CREATE TABLE IF NOT EXISTS `user_accounts` (
       `user_id` int NOT NULL AUTO_INCREMENT,
@@ -13,6 +20,31 @@
       `email` varchar(255) NOT NULL,
       `password` varchar(255) NOT NULL,
       PRIMARY KEY(`user_id`)
+  )");
+
+
+  // --- Create movies table if it does not already exist. (if first account on site)
+
+  $pdo -> query("CREATE TABLE IF NOT EXISTS `movies` (
+     `id` int(5) NOT NULL AUTO_INCREMENT,
+     `title` varchar(20) DEFAULT NULL,
+     `stars` int(11) DEFAULT NULL,
+     `genre` varchar(40) DEFAULT NULL,
+     `m_rating` varchar(5) DEFAULT NULL,
+     `year` varchar(4) DEFAULT NULL,
+     `runtime` varchar(40) DEFAULT NULL,
+     `theatre_release` varchar(10) DEFAULT NULL,
+     `dvd_release` varchar(10) DEFAULT NULL,
+     `actors` varchar(20) DEFAULT NULL,
+     `studio` varchar(10) DEFAULT NULL,
+     `summary` varchar(20) DEFAULT NULL,
+     `format` varchar(10) DEFAULT NULL,
+     `bluray` char(2) DEFAULT NULL,
+     `4kdisk` char(2) DEFAULT NULL,
+     `sd` char(2) DEFAULT NULL,
+     `hd` char(2) DEFAULT NULL,
+     `4kdig` char(2) DEFAULT NULL,
+     PRIMARY KEY (`id`)
   )");
 
 
@@ -38,7 +70,6 @@
 
     // There already exists an account with given username.
     if (!empty($result)) {
-      echo("This username already exists");
       // Flag as invalid.
       $usernameFree = false;
 
@@ -52,7 +83,6 @@
 
     // There already exists an account with given username.
     if (!empty($result)) {
-      echo("This email already exists");
       // Flag as invalid.
       $emailFree = false;
 
@@ -107,15 +137,25 @@
       $query = "INSERT INTO user_accounts (username, name, email, password) VALUES (?,?,?,?)";
       $pdo->prepare($query)->execute([$_POST['username'], $_POST['name'], $_POST['email'], $hash]);
 
-      //sessionStart('user_id');
+      // get the user_id (primary key) from the table for the new account and set it to the session ...
+      $query = "SELECT user_id FROM user_accounts WHERE username = ? LIMIT 1";
+      $stmt = $pdo->prepare($query);
+      $stmt->execute([$_POST['username']]);
+      $result = $stmt->fetchAll();
 
+      // Get user_id value returned from table by query.
+      $user_id = $result[0]['user_id'];
+
+      // Start session.
       session_start();
-      $_SESSION['user_id'] = $user_id;
+
+      // Set session variable to user's user_id
+      $_SESSION['userid'] = $user_id;
 
 
-      // http_redirect
-      //header("Location: ./index.php");
-      //die();
+      // Redirect to index.
+      header("Location: ./index.php");
+      die();
 
     }
   }
