@@ -1,22 +1,34 @@
-<?php   
+<?php
+
 	$title = "Search for Movies";
 	include('includes/library.php');
     include('header.php');
 
-	// queries db for things matching a certain name 
-	// ****** I can add more things to search by if we care to do that (not before check in)
-	if(isset($_POST['search']))
+	// Queries db for things matching / containing a given search term.
+	if(isset($_POST['search']) && !empty($_POST['search']))
 	{
-		$_SESSION['search'] = null;
-		$_SESSION['search']	= $_POST['search'];
-		
-		$searchFor = $_SESSION['search'];
+		//$_SESSION['search'] = null;
+		//$_SESSION['search']	= $_POST['search'];
+
+		//$searchFor = $_SESSION['search'];
+		$searchfor = $_POST['search'];
+
+		// Connect to database.
 		$pdo = dbconnect();
-		$sql = "select title, year, actors from movies where title = '$searchFor'";
-		$results = $pdo->query($sql);
-	
-	}	
-	
+
+		// Query to search for any titles containing search term.
+		$query = "SELECT title, year, actors FROM movies WHERE title LIKE ?";
+
+		// Prepare search query.
+		$stmt = $pdo->prepare($query);
+
+		// Get Results with search term.
+		$stmt->execute(["%" . $searchfor . "%"]);
+
+		$results = $stmt->fetchAll();
+
+	}
+
 ?>
 <!DOCTYPE HTML>
 <html lang='en'>
@@ -28,30 +40,32 @@
 <body>
 	<div>
 		<form method="post" class="container" name='search' >
-			
+
 			<h1>Movies</h1>
 				<input type="text" name="search" id="search" placeholder="Search by Name" required />
 				<input type='submit' value='Search' />
 		</form >
 				<?php
-				// prints shit out in table
-				if(isset($results))
-				{
-					echo "Your search results for " .$_SESSION['search'];
-					echo '<table>';
-					foreach($results as $row)
-					{
-						echo '<tr>';
-						
-						echo "<td> <img src='images/dummy_movie.jpg' /> </td>"; //movie image
-						echo "<td> $row[title] </td>"; // name
-						echo "<td> $row[year] </td>"; // release year
-						echo "<td> $row[actors] </td>"; //starring
-							
-						echo '</tr>';
+
+				if(isset($results)) {
+
+					echo "<h2>Your search results for " . $_POST['search'] . "</h2>";
+
+					echo '<table>';																						// Table.
+					foreach($results as $row) {
+
+						echo '<tr>';																						// New Row.
+
+						echo "<td> <img src='images/dummy_movie.jpg' /> </td>"; // Movie image.
+						echo "<td> $row[title] </td>"; 													// Movie title.
+						echo "<td> $row[year] </td>"; 													// Release year.
+						echo "<td> $row[actors] </td>"; 												// Actors.
+
+						echo '</tr>';																						// End Row.
 					}
-				echo '</table>';		
-			}	
-		?>	
+
+				echo '</table>';																						// End table.
+			}
+		?>
 	</body>
 </html>
