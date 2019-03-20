@@ -2,7 +2,7 @@
     $title = "Movie Database";
     include('header.php');
     // For testing the menu functionality
-    $_SESSION['userid'] = true;
+//    $_SESSION['userid'] = true;
 
     // For accessing DB
     include('includes/library.php');

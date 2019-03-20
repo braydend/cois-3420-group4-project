@@ -26,26 +26,29 @@
   // --- Create movies table if it does not already exist. (if first account on site)
 
   $pdo -> query("CREATE TABLE IF NOT EXISTS `movies` (
-     `id` int(5) NOT NULL AUTO_INCREMENT,
-     `title` varchar(20) DEFAULT NULL,
-     `stars` int(11) DEFAULT NULL,
-     `genre` varchar(40) DEFAULT NULL,
-     `m_rating` varchar(5) DEFAULT NULL,
-     `year` varchar(4) DEFAULT NULL,
-     `runtime` varchar(40) DEFAULT NULL,
-     `theatre_release` varchar(10) DEFAULT NULL,
-     `dvd_release` varchar(10) DEFAULT NULL,
-     `actors` varchar(20) DEFAULT NULL,
-     `studio` varchar(10) DEFAULT NULL,
-     `summary` varchar(20) DEFAULT NULL,
-     `format` varchar(10) DEFAULT NULL,
-     `bluray` char(2) DEFAULT NULL,
-     `4kdisk` char(2) DEFAULT NULL,
-     `sd` char(2) DEFAULT NULL,
-     `hd` char(2) DEFAULT NULL,
-     `4kdig` char(2) DEFAULT NULL,
-     PRIMARY KEY (`id`)
-  )");
+ `id` int(5) NOT NULL AUTO_INCREMENT,
+ `title` varchar(20) DEFAULT NULL,
+ `stars` int(11) DEFAULT NULL,
+ `genre` varchar(40) DEFAULT NULL,
+ `m_rating` varchar(5) DEFAULT NULL,
+ `year` varchar(4) DEFAULT NULL,
+ `runtime` varchar(40) DEFAULT NULL,
+ `theatre_release` varchar(10) DEFAULT NULL,
+ `dvd_release` varchar(10) DEFAULT NULL,
+ `actors` varchar(20) DEFAULT NULL,
+ `studio` varchar(10) DEFAULT NULL,
+ `summary` varchar(20) DEFAULT NULL,
+ `format` varchar(10) DEFAULT NULL,
+ `bluray` char(2) DEFAULT NULL,
+ `4kdisk` char(2) DEFAULT NULL,
+ `sd` char(2) DEFAULT NULL,
+ `hd` char(2) DEFAULT NULL,
+ `4kdig` char(2) DEFAULT NULL,
+ `userid` int(11) NOT NULL,
+ PRIMARY KEY (`id`),
+ KEY `userid` (`userid`) USING BTREE,
+ CONSTRAINT `userid_constraint` FOREIGN KEY (`userid`) REFERENCES `user_accounts` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE
+)");
 
 
   // --- PHP Validation ---
