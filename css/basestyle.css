@@ -274,3 +274,13 @@ h1
 #page-navigation a{
     text-decoration: none;
 }
+
+.faform{
+    padding: 0;
+}
+
+.fabutton{
+    background: none;
+    padding: 0px;
+    border: none;
+}
