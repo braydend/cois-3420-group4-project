@@ -1,6 +1,13 @@
 <?PHP
     $title = "Movie Database";
     include('header.php');
+
+    //Enable when account creation is implemented
+//    if(!isset($_SESSION['userid'])){
+//        header('location: register.php');
+//    }
+
+    // REMOVE THIS ONCE ACCOUNT CREATION IS IMPLEMENTED
     // For testing the menu functionality
 //    $_SESSION['userid'] = true;
 
@@ -21,7 +28,14 @@
                         echo("<img src='images/" . $movie['id'] . "' alt='" . $movie['title'] . " image' />");
                     echo("</div>");
                     echo("<div class='movie-btns'>");
-                        echo("<a href='" . $movie['id'] . "/editvid.php'><i class='fas fa-pencil-alt'></i></a>");
+                        echo("
+                            <form method='GET' class='faform' action='editvid.php'>
+                                <input type='text' name='movieid' value=" . $movie['id'] . " hidden />
+                                <button class='fabutton'>
+                                    <i class='fas fa-pencil-alt'></i>
+                                </button>
+                            </form>
+                            ");
                         echo("
                             <form method='GET' class='faform' action='deletevid.php'>
                                 <input type='text' name='movieid' value=" . $movie['id'] . " hidden />
@@ -30,7 +44,14 @@
                                 </button>
                             </form>
                             ");
-                        echo("<a href='" . $movie['id'] . "/displaydetails.php'><i class='fas fa-info-circle'></i></a>");
+                        echo("
+                            <form method='GET' class='faform' action='displaydetails.php'>
+                                <input type='text' name='movieid' value=" . $movie['id'] . " hidden />
+                                <button class='fabutton'>
+                                    <i class='fas fa-info-circle'></i>
+                                </button>
+                            </form>
+                            ");
                     echo("</div>");
                 echo("</div>");
             }
