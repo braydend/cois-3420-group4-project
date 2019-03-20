@@ -3,7 +3,7 @@
     include('header.php');
 
     if(!isset($_SESSION['userid'])){
-        header('location: register.php');
+        header('location: account.php');
     }
 
     // For accessing DB
