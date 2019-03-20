@@ -21,9 +21,9 @@
                     echo("<div class='movie-btns'>");
                         echo("<a href='" . $movie['id'] . "/editvid.php'><i class='fas fa-pencil-alt'></i></a>");
                         echo("
-                            <form method='GET' action='deletevid.php'>
+                            <form method='GET' class='faform' action='deletevid.php'>
                                 <input type='text' name='movieid' value=" . $movie['id'] . " hidden />
-                                <button>
+                                <button class='fabutton'>
                                     <i class='fas fa-trash-alt'></i>
                                 </button>
                             </form>
