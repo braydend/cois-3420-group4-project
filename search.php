@@ -7,10 +7,7 @@
 	// Queries db for things matching / containing a given search term.
 	if(isset($_POST['search']) && !empty($_POST['search']))
 	{
-		//$_SESSION['search'] = null;
-		//$_SESSION['search']	= $_POST['search'];
 
-		//$searchFor = $_SESSION['search'];
 		$searchfor = $_POST['search'];
 
 		// Connect to database.
