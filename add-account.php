@@ -1,7 +1,7 @@
 <?php
 
   // If already logged in, redirect immediately back to index.
-  if ( isset( $_SESSION['userid'] ) ) {
+  if ( isset( $_SESSION['userid']) && !empty($_SESSION['userid'])) {
     header("Location: ./index.php");
     die();
   }
@@ -145,9 +145,6 @@
 
       // Get user_id value returned from table by query.
       $user_id = $result[0]['user_id'];
-
-      // Start session.
-      session_start();
 
       // Set session variable to user's user_id
       $_SESSION['userid'] = $user_id;

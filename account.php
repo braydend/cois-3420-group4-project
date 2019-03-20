@@ -1,12 +1,9 @@
-<!DOCTYPE HTML>
-<html lang="en">
-<head>
-    <title>Create an Account</title>
-    <link rel="stylesheet" href="css/basestyle.css" />
-</head>
-<body>
+<?PHP
+    $title = "Create Account";
 
-    <?php include 'add-account.php'; ?>
+    include ('header.php');
+
+    include 'add-account.php'; ?>
 
     <div class="container">
         <h1>Create an account:</h1>
