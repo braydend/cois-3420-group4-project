@@ -36,7 +36,7 @@
 
 
   // --- No checkboxes selected on submit.
-	if( !isset($_POST['check']) && isset( $_POST['submit']) ) {
+	if( !isset($_POST['check']) && isset($_POST['submit']) ) {
 
 		// Set flag to tell the user to check atleast one box to modify the account.
 		$boxesChecked = false;
@@ -46,7 +46,7 @@
 
 
   // --- Atleast one checkbox was selected on submit.
-  else if ( isset($_POST['submit'])) ) {
+  if( isset($_POST['check']) && isset($_POST['submit']) ) {
 
 
 		// --- VALIDATE each selected field in the form.
@@ -189,7 +189,7 @@
 						$hash = password_hash($_POST['password'], PASSWORD_DEFAULT);
 
 						// UPDATE password in the users table.
-						$sql = "UPDATE user_accounts SET passsword = ? WHERE user_id = ?";
+						$sql = "UPDATE user_accounts SET password = ? WHERE user_id = ?";
 						$pdo->prepare($sql)->execute([$hash, $_SESSION['userid']]);
 
 						break;  // End UPDATE password query.
@@ -210,6 +210,20 @@
 
 	} // End submit with atleast one checkbox checked.
 
+
+  /*
+	// debug watch variables
+	echo "<p>isset(_POST['submit']): " . isset($_POST['submit']) . "</p>";
+	echo "<p>isset(_POST['check']): " . isset($_POST['check']) . "</p>";
+	echo "<p>boxesChecked: " . $boxesChecked . "</p>";
+	echo "<p>validUsername: " . $validUsername . "</p>";
+	echo "<p>usernameFree: " . $usernameFree . "</p>";
+	echo "<p>validPassword: " . $validPassword . "</p>";
+	echo "<p>validName: " . $validName . "</p>";
+	echo "<p>passwordMatchesConfirm: " . $passwordMatchesConfirm . "</p>";
+	echo "<p>validEmail: " . $validEmail . "</p>";
+	echo "<p>emailFree: " . $emailFree . "</p>";
+  */
 ?>
 
 <!DOCTYPE HTML>
@@ -220,7 +234,7 @@
 </head>
 <body>
   <div class="container">
-    <h1>Modify an account:</h1>
+    <h1>Edit your Account:</h1>
 		<h3>Check the boxes for the fields you wish to update</h3>
 		<?php if (isset($boxesChecked) && !$boxesChecked) {
 			echo "<span class='error'>Must select a field below to modify account.</span>";
@@ -270,7 +284,7 @@
 				} ?>
       </div>
 			<div class="form-buttons">
-        <input type="submit" value="Update Account!" />
+        <input type="submit" value="Update Account!" name="submit"/>
         <input type="reset" />
       </div>
     </form>
