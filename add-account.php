@@ -2,7 +2,7 @@
 
   // If already logged in, redirect immediately back to index.
   if ( isset( $_SESSION['userid']) && !empty($_SESSION['userid'])) {
-    header("Location: ./index.php");
+    header("location: editAccount.php");
     die();
   }
 
