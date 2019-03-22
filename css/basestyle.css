@@ -27,10 +27,6 @@
     text-align: center;
 }
 
-form{
-    padding-top: 2em;
-}
-
 .form-element{
     display: flex;
     justify-content: space-between;
@@ -87,13 +83,6 @@ form{
     float: right;
 }
 
-.movie-grid{
-    display: flex;
-    flex-wrap: wrap;
-    padding-left: 20%;
-    padding-right: 20%;
-}
-
 .movie{
     padding: 1em;
 }
@@ -107,56 +96,6 @@ form{
     padding-top: 5px;
     display: flex;
     justify-content: space-evenly;
-}
-
-textarea{
-  resize: none;
-}
-
-
-
-/* search styles */
-
-/* This needs to use class selectors to sop it interrupting the page navigation */
-
-/*nav*/
-/*{*/
-  /*height: 100%;*/
-  /*position: fixed;*/
-  /*height:45em ;*/
-  /*font-size: 19pt;*/
-/*}*/
-
-table
-{
-  float: right;
-  height:40em;
-  width: 95%;
-  border: .5em solid black;
-  padding: 2em;
-}
-
-td
-{
-  border:.1em solid black;
-  vertical-align:top;
-  padding: .5em;
-  text-align: top;
-  font-size: 20pt;
-}
-
-ol
-{
-  text-align:top;
-}
-
-
-
-/* page detail styles */
-
-
-h2{
-  font-size: 40pt;
 }
 
 .detailgeneral{
@@ -217,36 +156,11 @@ h2{
   list-style: none;
 }
 
-
-
-
-
-
-/* tempStyleSheet.css */
-
-body
-{
-  width:100%;
-}
-h1
-{
-  font-size: 32pt;
-
-}
 .search
 {
   justify-content: center;
   text-align: center;
 }
-
-/* This needs to use class selectors to sop it interrupting the page navigation */
-
-/*ul li:nth-child(even), ol li:nth-child(even)*/
-/*{*/
-  /*width:100%;*/
-  /*background-color:#566890;*/
-  /**/
-/*}*/
 
 #page-navigation{
     width: 100%;
@@ -264,11 +178,19 @@ h1
 }
 
 #page-navigation ul li{
-    background-color: aqua;
+    background-color: grey;
     list-style-type: none;
     width: 10em;
     padding: 1em 3em 1em 3em;
     text-align: center;
+    border: 2px lightgray solid;
+    border-radius: 10px;
+    color: white;
+}
+
+#page-navigation ul li:hover{
+    background-color: lightgray;
+    color: black;
 }
 
 #page-navigation a{
@@ -283,4 +205,23 @@ h1
     background: none;
     padding: 0px;
     border: none;
+}
+
+body{
+    background-color: grey;
+    font-family: 'Roboto', sans-serif;
+}
+
+.movie-grid{
+    display: flex;
+    flex-wrap: wrap;
+    margin-left: 20%;
+    margin-right: 20%;
+    border-radius: 25px;
+    background-color: rgba(155, 155, 155, 0.7);
+    justify-content: center;
+}
+
+input:focus{
+    border: 2px green solid;
 }
