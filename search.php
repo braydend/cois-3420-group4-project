@@ -4,6 +4,15 @@
 	include('includes/library.php');
     include('header.php');
 
+	// --- User is not logged in on page load. Send user to the login page.
+	if ( !isset($_SESSION['userid']) ) {
+
+		// Redirect to login.
+		header("location:login.php");
+		exit();
+
+	}
+
 	// Queries db for things matching / containing a given search term.
 	if(isset($_POST['search']) && !empty($_POST['search']))
 	{
