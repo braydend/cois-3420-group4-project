@@ -35,6 +35,14 @@
 
 
 
+	// Get the users data from the table for populating the text fields on page load.
+	$query = "SELECT * FROM user_accounts WHERE user_id = ?";
+	$stmt = $pdo->prepare($query);
+	$stmt->execute([$_SESSION['userid']]);
+	$userdata = $stmt->fetchAll();
+
+
+
   // --- No checkboxes selected on submit.
 	if( !isset($_POST['check']) && isset($_POST['submit']) ) {
 
@@ -59,13 +67,13 @@
 				case 'username':
 
 					// Enusre that username given does not already exist in the table ...
-			    $query = "SELECT 1 username FROM user_accounts WHERE username = ?";
+			    $query = "SELECT * FROM user_accounts WHERE username = ?";
 			    $stmt = $pdo->prepare($query);
 			    $stmt->execute([$_POST['username']]);
 			    $result = $stmt->fetchAll();
 
-			    // There already exists an account with given username.
-			    if (!empty($result)) {
+			    // There already exists an account with given username (that is not the current user).
+			    if ( !empty($result) && $result[0]['user_id'] !=  $_SESSION['userid'] ) {
 
 			      // Flag as invalid.
 			      $usernameFree = false;
@@ -92,13 +100,13 @@
 				case 'email':
 
 					// Ensure that email given does not already exist in the table ...
-			    $query = "SELECT 1 email FROM user_accounts WHERE email = ?";
+			    $query = "SELECT * FROM user_accounts WHERE email = ?";
 			    $stmt = $pdo->prepare($query);
 			    $stmt->execute([$_POST['email']]);
 			    $result = $stmt->fetchAll();
 
-			    // There already exists an account with given username.
-			    if (!empty($result)) {
+			    // There already exists an account with given email (that is not the current user).
+			    if ( !empty($result) && $result[0]['user_id'] !=  $_SESSION['userid'] ) {
 
 			      // Flag as invalid.
 			      $emailFree = false;
@@ -242,7 +250,7 @@
     <form method='post' class='container' name ='details'>
       <div class="form-element">
         <label for="username">Username:</label>
-        <input type="text" name="username" id="username" />
+        <input type="text" name="username" id="username" value=<?php echo $userdata[0]['username']; ?> />
 				<input type="checkbox" name="check[]" value='username' />
 				<?php if (isset($validUsername) && !$validUsername) {
 					echo "<span class='error'>username is not valid</span>";
@@ -252,7 +260,7 @@
       </div>
       <div class="form-element">
         <label for="name">Name:</label>
-        <input type="text" name="name" id="name" />
+        <input type="text" name="name" id="name" value=<?php echo "'" . $userdata[0]['name'] . "'"; ?> />
 				<input type="checkbox" name="check[]" value='name'/>
 				<?php if (isset($validName) && !$validName) {
 					echo "<span class='error'>name is not valid</span>";
@@ -260,7 +268,7 @@
      	</div>
       <div class="form-element">
         <label for="email">Email:</label>
-        <input type="email" name="email" id="email" />
+        <input type="email" name="email" id="email" value=<?php echo $userdata[0]['email']; ?> />
 				<input type="checkbox" name="check[]" value='email'/>
 				<?php if (isset($validEmail) && !$validEmail) {
 					echo "<span class='error'>email is not valid</span>";
