@@ -74,13 +74,11 @@
 	// --- username was given and exists and password was given and matches username in the table.
 	else {
 
-		// sets cookie which doesn't do anything
-		// ----------------------------------------( wat do? Graham pls )
-		if($_POST["remember"]=='1' || $_POST["remember"]=='true') {
+		// Sets cookies when remember box is checked on login.
+		if( isset($_POST["remember"]) ) {
 
-			$hour = time() + 3600 * 24 * 30;
-			setcookie('username', $login, $hour);
-			setcookie('password', $password, $hour);
+			setcookie('username', $_POST['username']);
+			setcookie('password', $_POST['password']);
 
 		}
 
@@ -124,7 +122,7 @@
     <form method="post" action="#">
         <div class="form-element">
             <label for="username">Username:</label>
-            <input type="text" name="username" id="username" />
+            <input type="text" name="username" id="username" <?php if ( isset($_COOKIE['username']) ) { echo "value=" . $_COOKIE['username']; } ?> />
 
 						<!-- Inline php for error validation message -->
 						<?php if (!$usernameValid) {
@@ -134,7 +132,7 @@
         </div>
         <div class="form-element">
             <label for="password">Password:</label>
-            <input type="password" name="password" id="password" />
+            <input type="password" name="password" id="password" <?php if ( isset($_COOKIE['password']) ) { echo "value=" . $_COOKIE['password']; } ?> />
 
 						<!-- Inline php for error validation message -->
 						<?php if (!$passwordValid) {

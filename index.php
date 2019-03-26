@@ -2,12 +2,21 @@
     $title = "Movie Database";
     include('header.php');
     // For testing the menu functionality
-//    $_SESSION['userid'] = true;
+    // $_SESSION['userid'] = true;
+
+    // --- User is not logged in on page load. Send user to the login page.
+    if ( !isset($_SESSION['userid']) ) {
+
+      // Redirect to login.
+      header("location:login.php");
+      exit();
+
+    }
 
     // For accessing DB
     include('includes/library.php');
     $pdo = & dbconnect();
-    $stmt = $pdo->prepare("SELECT * FROM movies WHERE userid = ?");
+    $stmt = $pdo->prepare("SELECT * FROM movies WHERE user_id = ?");
     $stmt->execute([$_SESSION['userid']]);
     $movies = $stmt->fetchAll();
 ?>
