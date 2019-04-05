@@ -20,9 +20,7 @@
             <div class="form-element">
                 <label for="name">Name:</label>
                 <input type="text" name="name" id="name" />
-                <?php if (isset($validName) && !$validName) {
-                  echo "<span class='error'>name is not valid</span>";
-                } ?>
+                <span class='error' id="nameError"></span>
             </div>
             <div class="form-element">
                 <label for="email">Email:</label>
@@ -48,10 +46,11 @@
                 } ?>
             </div>
             <div class="form-buttons">
-                <input type="submit" value="Create Account!" name="submit" />
+                <input type="submit" id="submit" value="Create Account!" name="submit" />
                 <input type="reset" />
             </div>
         </form>
     </div>
+    <script src="js/account.js"></script>
 </body>
 </html>
