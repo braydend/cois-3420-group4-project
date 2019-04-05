@@ -13,9 +13,8 @@
                 <input type="text" name="username" id="username" />
                 <?php if (isset($validUsername) && !$validUsername) {
                   echo "<span class='error'>username is not valid</span>";
-                } elseif (isset($usernameFree) && !$usernameFree) {
-                  echo "<span class='error'>username already in use</span>";
                 } ?>
+                <span class='error' id='usernameError'></span>
             </div>
             <div class="form-element">
                 <label for="name">Name:</label>
