@@ -25,9 +25,8 @@
             <div class="form-element">
                 <label for="email">Email:</label>
                 <input type="email" name="email" id="email" />
-                <?php if (isset($validEmail) && !$validEmail) {
-                  echo "<span class='error'>email is not valid</span>";
-                } elseif (isset($emailFree) && !$emailFree) {
+                <span class='error' id="emailError"></span>
+                <?php if (isset($emailFree) && !$emailFree) {
                   echo "<span class='error'>email already in use</span>";
                 } ?>
             </div>
