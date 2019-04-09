@@ -1,6 +1,11 @@
 $(document).ready(function() {
+    // Setup password
+    $('#password').strength();
+
+
     // Form validation on submit
     $('#submit').on('click', function(event){
+        let password = $('.strength_meter').children('div');
         let name = $("#name");
         let email = $("#email");
         let emailRegex = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
@@ -17,6 +22,12 @@ $(document).ready(function() {
             event.preventDefault();
         }else{
             $("#emailError").html("");
+        }
+        // Password cannot be weak
+        $('#passwordError').html('');
+        if(password.hasClass('weak') || password.hasClass('veryweak')){
+            $('#passwordError').html('Your email must be stronger!');
+            event.preventDefault();
         }
     });
 

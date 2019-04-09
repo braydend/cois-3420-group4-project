@@ -5,6 +5,7 @@
 
     include 'add-account.php'; ?>
 
+
     <div class="container">
         <h1>Create an account:</h1>
         <form method="post" name="form">
@@ -31,10 +32,8 @@
             </div>
             <div class="form-element">
                 <label for="password">Password:</label>
-                <input type="password" name="password" id="password" />
-                <?php if (isset($validPassword) && !$validPassword) {
-                  echo "<span class='error'>" . $passErr . "</span>";
-                } ?>
+                <input id="password" type="password" name="password" />
+                <span class='error' id="passwordError"></span>
             </div>
             <div class="form-element">
                 <label for="password_confirm">Confirm Password:</label>
