@@ -5,6 +5,7 @@
 
     include 'add-account.php'; ?>
 
+
     <div class="container">
         <h1>Create an account:</h1>
         <form method="post" name="form">
@@ -13,32 +14,26 @@
                 <input type="text" name="username" id="username" />
                 <?php if (isset($validUsername) && !$validUsername) {
                   echo "<span class='error'>username is not valid</span>";
-                } elseif (isset($usernameFree) && !$usernameFree) {
-                  echo "<span class='error'>username already in use</span>";
                 } ?>
+                <span class='error' id='usernameError'></span>
             </div>
             <div class="form-element">
                 <label for="name">Name:</label>
                 <input type="text" name="name" id="name" />
-                <?php if (isset($validName) && !$validName) {
-                  echo "<span class='error'>name is not valid</span>";
-                } ?>
+                <span class='error' id="nameError"></span>
             </div>
             <div class="form-element">
                 <label for="email">Email:</label>
                 <input type="email" name="email" id="email" />
-                <?php if (isset($validEmail) && !$validEmail) {
-                  echo "<span class='error'>email is not valid</span>";
-                } elseif (isset($emailFree) && !$emailFree) {
+                <span class='error' id="emailError"></span>
+                <?php if (isset($emailFree) && !$emailFree) {
                   echo "<span class='error'>email already in use</span>";
                 } ?>
             </div>
             <div class="form-element">
                 <label for="password">Password:</label>
-                <input type="password" name="password" id="password" />
-                <?php if (isset($validPassword) && !$validPassword) {
-                  echo "<span class='error'>" . $passErr . "</span>";
-                } ?>
+                <input id="password" type="password" name="password" />
+                <span class='error' id="passwordError"></span>
             </div>
             <div class="form-element">
                 <label for="password_confirm">Confirm Password:</label>
@@ -48,10 +43,11 @@
                 } ?>
             </div>
             <div class="form-buttons">
-                <input type="submit" value="Create Account!" name="submit" />
+                <input type="submit" id="submit" value="Create Account!" name="submit" />
                 <input type="reset" />
             </div>
         </form>
     </div>
+    <script src="js/account.js"></script>
 </body>
 </html>
