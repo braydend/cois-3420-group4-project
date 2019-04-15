@@ -21,38 +21,16 @@
     $movies = $stmt->fetchAll();
 ?>
 
+<!-- Delete vid confirmation modal -->
 <div id="dialog-confirm">
   <p>Are you sure you want to delete this video?</p>
 </div>
 
-<script type="text/javascript">
+<!-- Display-Details window/modal -->
+<div></div>
 
-  // Movie id to be deleted.
-  var mov_id;
-
-  // Dialog box.
-  var dialog = $("#dialog-confirm").dialog({
-    autoOpen: false,
-    resizable: false,
-    height: "auto",
-    width: 400,
-    modal: true,
-    buttons: {
-      'Delete': function() {
-        $.ajax({
-          url: "deletevid.php",
-          data: { movieid: mov_id },
-          async: false
-        });
-        location.reload();
-      },
-      Cancel: function() {
-        $(this).dialog("close");
-      }
-    }
-  });
-
-</script>
+<!-- include script to create modals -->
+<script type="text/javascript" src="js/indexModals.js"></script>
 
 <div class="container">
     <h1>Movies</h1>
@@ -66,7 +44,7 @@
                     echo("<div class='movie-btns'>");
                         echo("<a href='" . $movie['movie_id'] . "/editvid.php'><i class='fas fa-pencil-alt'></i></a>");
                         echo("<button class='fabutton fas fa-trash-alt' id='{$movie['movie_id']}'></button>");
-                        echo("<a href='" . $movie['movie_id'] . "/displaydetails.php'><i class='fas fa-info-circle'></i></a>");
+                        echo("<button class='fabutton fas fa-info-circle' id='{$movie['movie_id']}'></button>");
                     echo("</div>");
                 echo("</div>");
             }
@@ -76,20 +54,15 @@
             }
         ?>
 
-        <script type="text/javascript">
+        <!-- include handlers for modals -->
+        <script type="text/javascript" src="js/indexHandlers.js"></script>
 
-        // Delete button handler.
-        $(".fa-trash-alt").click(function(){
-
-          // Set the movie id.
-          mov_id = this.getAttribute('id');
-
-          // Open dialog box.
-          dialog.dialog("open");
-
-        });
-        </script>
     </div>
+
+    <form action="addvid.php">
+      <input type="submit" value="Add Video" />
+    </form>
+
 </div>
 </body>
 </html>
