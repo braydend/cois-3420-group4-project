@@ -18,7 +18,7 @@
 	// Get db connection.
 	$pdo = dbconnect();
 
-
+  include 'delete-account.php';
 
 	// --- User is not logged in on page load. Send user to the login page.
 	if ( !isset($_SESSION['userid']) ) {
@@ -294,6 +294,7 @@
 			<div class="form-buttons">
         <input type="submit" value="Update Account!" name="submit"/>
         <input type="reset" />
+				<input type="submit" name="delete" value="Delete Account" />
       </div>
     </form>
   </div>
