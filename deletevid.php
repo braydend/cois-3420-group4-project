@@ -15,7 +15,7 @@
         //delete movie from db
         $movieid = $_GET['movieid'];
         $pdo = & dbconnect();
-        $query = "DELETE FROM movies WHERE id = ?";
+        $query = "DELETE FROM movies WHERE movie_id = ?";
         $stmt = $pdo->prepare($query);
         $stmt->execute(array($movieid));
     }
