@@ -58,6 +58,11 @@
         <script type="text/javascript" src="js/indexHandlers.js"></script>
 
     </div>
+
+    <form action="addvid.php">
+      <input type="submit" value="Add Video" />
+    </form>
+
 </div>
 </body>
 </html>
