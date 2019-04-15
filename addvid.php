@@ -167,13 +167,8 @@ if(isset($_REQUEST['btn_insert']))
 
 ?>
 
-<script type="text/javascript">
-  $( function() {
-    $( ".datepicker" ).datepicker();
-  });
-</script>
+    <script type="text/javascript" src="js/addvid.js"></script>
 
-  <body>
     <div class="container">
       <h1>Add Movie</h1>
         <form id="addmov" name="addmov" method="post">
@@ -305,8 +300,9 @@ if(isset($_REQUEST['btn_insert']))
         </div>
 
         <div class="form-element">
-          <label for="plot">Plot Summary:</label>
-          <input type="textarea" name="summary" rows="8" cols="80" id="summary">
+          <label for="summary">Plot Summary:</label>
+          <textarea name="summary" rows="6" cols="80" maxlength="2500" id="summary" style="resize: none;"></textarea>
+            <span id="rchars">2500</span><span>Character(s) Remaining</span>
         </div>
 
         <div class="form-element">
