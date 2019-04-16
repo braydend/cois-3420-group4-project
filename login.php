@@ -4,6 +4,17 @@
 
 	include('includes/library.php');
   include('header.php');
+  
+  if(isset($_POST['resetPW']))
+  {
+	  	$pdo = dbconnect();
+
+		$_SESSION['resetPW'] = $_POST['resetPW'];
+		$query = "UPDATE `user_accounts` SET `password` ='Password1' WHERE `email` = ?";
+		$pdo->prepare($query)->execute($_POST['resetPW']);
+				
+		header('location:mail.php');
+  }
 
   // Variable for number of allowed login attempts.
 	$numAttemptsAllowed = 5;
@@ -145,15 +156,24 @@
                 <label for="remember">Remember Me</label>
                 <input type="checkbox" name="remember" id="remember" />
             </div>
-            <div class="login-forgot">
-                <a href="#">Forgot Password?</a>
-            </div>
+    
         </div>
         <div class="form-buttons">
             <input type="submit" value="Login!" />
             <input type="reset" />
         </div>
     </form>
+	
+	
+
+
+		<div class="login-forgot">
+		<form method='post' action='login.php' >
+			<input type='text' name='resetPW' > </input>
+			<input type='submit' placeholder='email' value='reset password'> </input>
+		</form>
+		</div>
+		
 </div>
 
 <!-- Print out number of login attempts remaining (if there are any) if not the first attempt. -->
